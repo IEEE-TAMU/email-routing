@@ -17,7 +17,7 @@ export default {
     const route = Routes.find(({ destination }) => destination === message.to)
     if (!route) {
       console.log(`No route found for email to ${message.to}`);
-      forwardToSingleRecipient(message, DefaultRecipient);
+      await forwardToSingleRecipient(message, DefaultRecipient);
     }
     else if (route.recipients.length === 1) {
       console.log(`Forwarding email to ${message.to} to ${route.recipients[0]}`);
