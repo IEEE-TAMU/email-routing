@@ -15,29 +15,12 @@ function makeBanner(otherRecipients: string[]) {
   return "This email was sent to multiple officers. Please remember to CC all officers who got this message. \n\n" + otherRecipients.join(", ");
 }
 
-function messageWithBanner(message: ForwardableEmailMessage, recipient: string, otherRecipients: string[]) {
-  const banner = new TextEncoder().encode(makeBanner(otherRecipients));
-  const reader = message.raw.getReader();
-
-  // Create a new ReadableStream with the prepended banner
-  const newBody = new ReadableStream({
-    start(controller) {
-      controller.enqueue(banner);
-
-      function pump() {
-        reader.read().then(({ done, value }) => {
-          if (done) {
-            controller.close();
-            return;
-          }
-          controller.enqueue(value);
-          pump();
-        }).catch(error => controller.error(error));
-      }
-
-      pump();
-    }
-  });
+async function messageWithBanner(message: ForwardableEmailMessage, recipient: string, otherRecipients: string[]) {
+  const banner = makeBanner(otherRecipients);
+  const body = await new Response(message.raw).text();
+  console.log(`banner: ${banner}`);
+  console.log(`body: ${body}`);
+  const newBody = banner + "\n\n" + body;
 
   return new EmailMessage(message.from, recipient, newBody);
 }
@@ -54,7 +37,8 @@ async function forwardToSingleRecipient(message: ForwardableEmailMessage, recipi
 async function forwardToMultipleRecipients(message: ForwardableEmailMessage, recipients: string[], env: Environment) {
   for (const recipient of recipients) {
     try {
-      await env.MAIL.send(messageWithBanner(message, recipient, recipients.filter(r => r !== recipient)));
+      const newMessage = await messageWithBanner(message, recipient, recipients.filter(r => r !== recipient));
+      await env.MAIL.send(newMessage);
     } catch (e) {
       console.error(`Failed to forward email to ${recipient}: ${e}`);
     }
