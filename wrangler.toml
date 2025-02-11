@@ -6,3 +6,5 @@ preview_urls = false
 
 [observability.logs]
 enabled = true
+
+send_email = [{name = "MAIL"}]
