@@ -6,7 +6,9 @@
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
     "start": "wrangler dev",
-    "add_email": "esrun scripts/add_email.ts"
+    "add-email": "esrun scripts/modify_email.ts add",
+    "list-email": "esrun scripts/modify_email.ts list",
+    "delete-email": "esrun scripts/modify_email.ts delete"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250204.0",

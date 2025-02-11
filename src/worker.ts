@@ -1,11 +1,13 @@
-import { Mappings, DefaultRecipient } from "./users";
-
-
+import { Routes, DefaultRecipient } from "./routes";
 
 export default {
   async email(message: ForwardableEmailMessage, env: unknown, ctx: ExecutionContext) {
-    const recipient = Mappings.find(({ email }) => email === message.to)?.recipient ?? DefaultRecipient;
+    const recipient = Routes.find(({ destination }) => destination === message.to)?.recipient ?? DefaultRecipient;
     console.log(`Forwarding email from ${message.from} to ${recipient}`);
-    await message.forward(recipient);
+    try {
+      await message.forward(recipient);
+    } catch (error) {
+      console.error('Error forwarding email:', error);
+    }
   }
 }
