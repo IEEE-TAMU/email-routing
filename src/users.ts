@@ -1,5 +1,7 @@
-const mappings = [
+const Mappings = [
     { "email": "webmaster@ieeetamu.org", "recipient": "chnorton@tamu.edu" },
 ]
 
-export default mappings;
+const DefaultRecipient = "chnorton@tamu.edu";
+
+export { Mappings, DefaultRecipient };
