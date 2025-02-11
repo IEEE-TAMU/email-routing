@@ -15,7 +15,7 @@ Add the officer's ieeetamu.org address to the routing table by editing the [rout
 
 For example: to route emails addressed to `president@ieeetamu.org` to `netid@tamu.edu`, add the following line to the routes.ts file:
 ```typescript
-{ "destination": "president@ieeetamu.org", "recipient": "netid@tamu.edu" }
+{ "destination": "president@ieeetamu.org", "recipients": ["netid@tamu.edu"] }
 ```
 
 ## Checking if an officer is verified
