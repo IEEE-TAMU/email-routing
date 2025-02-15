@@ -16,5 +16,8 @@
     "dotenv": "^16.4.7",
     "esrun": "^3.2.26",
     "wrangler": "^3.107.3"
+  },
+  "dependencies": {
+    "mimetext": "^3.0.27"
   }
 }
