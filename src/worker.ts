@@ -15,10 +15,14 @@ async function forwardToSingleRecipient(message: ForwardableEmailMessage, recipi
   }
 }
 
-async function forwardToMultipleRecipients(message: ForwardableEmailMessage, recipients: string[], env: Environment) {
-  for (const recipient of recipients) {
-    forwardToSingleRecipient(message, recipient);
-  }
+async function forwardToMultipleRecipients(message: ForwardableEmailMessage, recipients: string[]) {
+  const promises: Promise<void>[] = [];
+  recipients.forEach(async recipient => {
+    promises.push(message.forward(recipient));
+  });
+  await Promise.all(promises).catch(e => {
+    console.error(`Failed to forward email to multiple recipients: ${e}`);
+  });
 }
 
 function blackholeMessage(message: ForwardableEmailMessage) {
@@ -60,7 +64,7 @@ export default {
       await forwardToSingleRecipient(message, route.recipients[0]);
     } else {
       console.log(`Forwarding email to ${message.to} to ${route.recipients.join(", ")}`);
-      await forwardToMultipleRecipients(message, route.recipients, env);
+      await forwardToMultipleRecipients(message, route.recipients);
     }
   }
 }
