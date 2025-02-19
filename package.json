@@ -11,11 +11,11 @@
     "delete-email": "esrun scripts/modify_email.ts delete"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250204.0",
+    "@cloudflare/workers-types": "^4.20250214.0",
     "cloudflare": "^4.1.0",
     "dotenv": "^16.4.7",
     "esrun": "^3.2.26",
-    "wrangler": "^3.107.3"
+    "wrangler": "^3.109.2"
   },
   "dependencies": {
     "mimetext": "^3.0.27"
