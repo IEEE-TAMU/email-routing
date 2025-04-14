@@ -8,7 +8,8 @@
     "start": "wrangler dev",
     "add-email": "esrun scripts/modify_email.ts add",
     "list-email": "esrun scripts/modify_email.ts list",
-    "delete-email": "esrun scripts/modify_email.ts delete"
+    "delete-email": "esrun scripts/modify_email.ts delete",
+    "check": "scripts/check_emails.sh"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250214.0",
