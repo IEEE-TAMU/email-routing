@@ -24,4 +24,5 @@ jobs:
       - name: Run npm check
         run: npm run check
         env:
+          CLOUDFLARE_ACCOUNT_ID: 0e6d466dd96fb5b35ed0748ee280321f # webmaster@ieeetamu.org
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
