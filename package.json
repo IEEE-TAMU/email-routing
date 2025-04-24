@@ -1,5 +1,5 @@
 {
-  "name": "ieee-tamu-email-router",
+  "name": "email-routing",
   "version": "0.0.0",
   "private": true,
   "scripts": {
