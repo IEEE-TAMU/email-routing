@@ -19,6 +19,9 @@ const Routes = [
 
     { "destination": "donotreply@ieeetamu.org", "recipients": [BlackholeRecipient] },
     { "destination": "noreply@ieeetamu.org", "recipients": [BlackholeRecipient] },
+
+    // recovery email - should be set as the recovery email for any accounts
+    { "destination": "recovery@ieeetamu.org", "recipients": ["chnorton@tamu.edu"] },
 ]
 
 export { Routes, DefaultRecipient, BlackholeRecipient };
