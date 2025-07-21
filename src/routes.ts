@@ -6,7 +6,7 @@ const Routes = [
     // Executive Board
     { "destination": "president@ieeetamu.org", "recipients": ["oliver.jansen@tamu.edu"] },
     { "destination": "vicepresident@ieeetamu.org", "recipients": ["smayhue@tamu.edu"] },
-    { "destination": "treasurer@ieeetamu.org", "recipients": [ "ieeetamu.cfo@gmail.com " ] }, //"nafibaksh@tamu.edu"] },
+    { "destination": "treasurer@ieeetamu.org", "recipients": [ "ieeetamu.cfo@gmail.com " ] }, //"nafibaksh@ tamu.edu"] },
     { "destination": "secretary@ieeetamu.org", "recipients": ["akafle@tamu.edu"] },
 
     // Undersecretaries
