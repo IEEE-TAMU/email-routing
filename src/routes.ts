@@ -18,7 +18,7 @@ const Routes = [
     { "destination": "tec@ieeetamu.org", "recipients": ["jyotiverma607@tamu.edu"] },
     { "destination": "publicrelations@ieeetamu.org", "recipients": ["liannie@tamu.edu"] },
     { "destination": "corporate@ieeetamu.org", "recipients": ["ieeetamu.corporate@gmail.com" ] },
-    // { "destination": "activities@ieeetamu.org", "recipients": ["TBD"]},
+    { "destination": "activities@ieeetamu.org", "recipients": ["andyluu05@tamu.edu", "jr338567@tamu.edu"]},
 
     // Special use
 		{ "destination": "summit@ieeetamu.org", "recipients": ["alanjaf@tamu.edu"] },
