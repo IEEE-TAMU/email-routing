@@ -2,6 +2,7 @@
   "name": "email-routing",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
@@ -9,13 +10,22 @@
     "add-email": "esrun scripts/modify_email.ts add",
     "list-email": "esrun scripts/modify_email.ts list",
     "delete-email": "esrun scripts/modify_email.ts delete",
-    "check": "scripts/check_emails.sh"
+    "check": "scripts/check_emails.sh",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --write src/**/*.ts",
+    "validate": "npm run lint && npm run format"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250214.0",
     "cloudflare": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.43.0",
+    "@typescript-eslint/parser": "^8.43.0",
+    "cloudflare": "^4.1.0",
     "dotenv": "^17.0.0",
-    "esrun": "^3.2.26",
+    "eslint": "^9.35.0",
+    "esrun": "^0.0.1",
+    "prettier": "^3.6.2",
     "wrangler": "^4.0.0"
   },
   "dependencies": {

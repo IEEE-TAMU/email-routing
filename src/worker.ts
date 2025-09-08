@@ -1,13 +1,19 @@
-import { EmailMessage } from "cloudflare:email";
-import { createMimeMessage } from "mimetext";
-import { Routes, DefaultRecipient, BlackholeRecipient } from "./routes";
+import { EmailMessage } from 'cloudflare:email';
+import { createMimeMessage } from 'mimetext';
+import { Routes, DefaultRecipient, BlackholeRecipient } from './routes';
+
+function normalizeEmailAddress(address: string): string {
+  return address.trim().toLowerCase();
+}
 
 // Execution Environment as defined in the wranger.toml file
 // See cloudflare docs for information on how to define this
-interface Environment { }
+interface Environment {}
 
-
-async function forwardToSingleRecipient(message: ForwardableEmailMessage, recipient: string) {
+async function forwardToSingleRecipient(
+  message: ForwardableEmailMessage,
+  recipient: string
+) {
   try {
     await message.forward(recipient);
   } catch (e) {
@@ -15,25 +21,30 @@ async function forwardToSingleRecipient(message: ForwardableEmailMessage, recipi
   }
 }
 
-async function forwardToMultipleRecipients(message: ForwardableEmailMessage, recipients: string[]) {
-  const promises: Promise<void>[] = [];
-  recipients.forEach(async recipient => {
-    promises.push(message.forward(recipient));
-  });
-  await Promise.all(promises).catch(e => {
+async function forwardToMultipleRecipients(
+  message: ForwardableEmailMessage,
+  recipients: string[]
+) {
+  try {
+    await Promise.all(
+      recipients.map((recipient) => message.forward(recipient))
+    );
+  } catch (e) {
     console.error(`Failed to forward email to multiple recipients: ${e}`);
-  });
+  }
 }
 
 function blackholeMessage(message: ForwardableEmailMessage) {
   const msg = createMimeMessage();
-  msg.setHeader("In-Reply-To", message.headers.get("Message-ID")!);
-  msg.setSender({ name: "No Reply", addr: message.to });
+  msg.setHeader('In-Reply-To', message.headers.get('Message-ID')!);
+  msg.setHeader('Auto-Submitted', 'auto-replied');
+  msg.setHeader('Precedence', 'bulk');
+  msg.setSender({ name: 'No Reply', addr: message.to });
   msg.setRecipient(message.from);
-  msg.setSubject("Unmonitored Email Address");
+  msg.setSubject('Unmonitored Email Address');
   msg.addMessage({
     contentType: 'text/plain',
-    data: `This email address is not monitored. Please direct inquiries to the appropriate contact found at ieeetamu.org.`
+    data: `This email address is not monitored. Please direct inquiries to the appropriate contact found at ieeetamu.org.`,
   });
 
   const reply = new EmailMessage(message.to, message.from, msg.asRaw());
@@ -50,21 +61,38 @@ async function discardAndNotify(message: ForwardableEmailMessage) {
 }
 
 export default {
-  async email(message: ForwardableEmailMessage, env: Environment, ctx: ExecutionContext) {
-    const route = Routes.find(({ destination }) => destination === message.to)
+  async email(
+    message: ForwardableEmailMessage,
+    _env: Environment,
+    _ctx: ExecutionContext
+  ) {
+    // Validate domain to prevent forwarding abuse
+    if (!message.to.endsWith('@ieeetamu.org')) {
+      console.warn('Rejected message for foreign domain:', message.to);
+      return;
+    }
+
+    const normalizedTo = normalizeEmailAddress(message.to);
+    const route = Routes.find(
+      ({ destination }) => normalizeEmailAddress(destination) === normalizedTo
+    );
+
     if (!route) {
       console.log(`No route found for email to ${message.to}`);
       await forwardToSingleRecipient(message, DefaultRecipient);
-    }
-    else if (route.recipients.includes(BlackholeRecipient)) {
+    } else if (route.recipients.includes(BlackholeRecipient)) {
       console.log(`Blackholing email to ${message.to}`);
       await discardAndNotify(message);
     } else if (route.recipients.length === 1) {
-      console.log(`Forwarding email to ${message.to} to ${route.recipients[0]}`);
+      console.log(
+        `Forwarding email to ${message.to} to ${route.recipients[0]}`
+      );
       await forwardToSingleRecipient(message, route.recipients[0]);
     } else {
-      console.log(`Forwarding email to ${message.to} to ${route.recipients.join(", ")}`);
+      console.log(
+        `Forwarding email to ${message.to} to ${route.recipients.join(', ')}`
+      );
       await forwardToMultipleRecipients(message, route.recipients);
     }
-  }
-}
+  },
+};
