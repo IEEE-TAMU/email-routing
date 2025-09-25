@@ -7,6 +7,8 @@ const DefaultRecipient = 'chnorton@tamu.edu';
 
 const BlackholeRecipient = 'blackhole';
 
+const AuditRecipient = DefaultRecipient;
+
 const Routes: readonly Route[] = [
   // Executive Board
   {
@@ -54,5 +56,5 @@ const Routes: readonly Route[] = [
   { destination: 'recovery@ieeetamu.org', recipients: ['chnorton@tamu.edu'] },
 ];
 
-export { Routes, DefaultRecipient, BlackholeRecipient };
+export { Routes, DefaultRecipient, BlackholeRecipient, AuditRecipient };
 export type { Route };

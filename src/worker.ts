@@ -1,6 +1,11 @@
 import { EmailMessage } from 'cloudflare:email';
 import { createMimeMessage } from 'mimetext';
-import { Routes, DefaultRecipient, BlackholeRecipient } from './routes';
+import {
+  Routes,
+  DefaultRecipient,
+  BlackholeRecipient,
+  AuditRecipient,
+} from './routes';
 
 function normalizeEmailAddress(address: string): string {
   return address.trim().toLowerCase();
@@ -31,6 +36,17 @@ async function forwardToMultipleRecipients(
     );
   } catch (e) {
     console.error(`Failed to forward email to multiple recipients: ${e}`);
+  }
+}
+
+async function forwardToAudit(message: ForwardableEmailMessage) {
+  try {
+    await message.forward(AuditRecipient);
+    console.log(`Forwarded email to audit recipient: ${AuditRecipient}`);
+  } catch (e) {
+    console.error(
+      `Failed to forward email to audit recipient ${AuditRecipient}: ${e}`
+    );
   }
 }
 
@@ -77,22 +93,36 @@ export default {
       ({ destination }) => normalizeEmailAddress(destination) === normalizedTo
     );
 
+    // Always forward to audit recipient first (except for blackholed emails)
+    let isBlackholed = false;
+
     if (!route) {
       console.log(`No route found for email to ${message.to}`);
-      await forwardToSingleRecipient(message, DefaultRecipient);
+      await Promise.all([
+        forwardToSingleRecipient(message, DefaultRecipient),
+        forwardToAudit(message),
+      ]);
     } else if (route.recipients.includes(BlackholeRecipient)) {
       console.log(`Blackholing email to ${message.to}`);
+      isBlackholed = true;
       await discardAndNotify(message);
+      // Note: We don't forward blackholed emails to audit to avoid spam
     } else if (route.recipients.length === 1) {
       console.log(
         `Forwarding email to ${message.to} to ${route.recipients[0]}`
       );
-      await forwardToSingleRecipient(message, route.recipients[0]);
+      await Promise.all([
+        forwardToSingleRecipient(message, route.recipients[0]),
+        forwardToAudit(message),
+      ]);
     } else {
       console.log(
         `Forwarding email to ${message.to} to ${route.recipients.join(', ')}`
       );
-      await forwardToMultipleRecipients(message, route.recipients);
+      await Promise.all([
+        forwardToMultipleRecipients(message, route.recipients),
+        forwardToAudit(message),
+      ]);
     }
   },
 };
