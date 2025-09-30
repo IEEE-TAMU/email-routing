@@ -30,7 +30,7 @@ const Routes: readonly Route[] = [
   { destination: 'historian@ieeetamu.org', recipients: ['gjohny@tamu.edu'] },
 
   // Chairs
-  { destination: 'events@ieeetamu.org', recipients: ['alanjaf@tamu.edu'] },
+  { destination: 'events@ieeetamu.org', recipients: ['alanjaf@tamu.edu', 'jadonlee@tamu.edu', 'tanbuyyana04@tamu.edu', 'pallavigok@tamu.edu'] },
   { destination: 'tec@ieeetamu.org', recipients: ['jyotiverma607@tamu.edu'] },
   {
     destination: 'publicrelations@ieeetamu.org',
