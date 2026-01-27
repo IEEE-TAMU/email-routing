@@ -11,42 +11,24 @@ function normalizeEmailAddress(address: string): string {
   return address.trim().toLowerCase();
 }
 
+function normalizeAndDedupe(emails: string[]): string[] {
+  return [...new Set(emails.map(normalizeEmailAddress))];
+}
+
 // Execution Environment as defined in the wranger.toml file
 // See cloudflare docs for information on how to define this
 interface Environment {}
 
-async function forwardToSingleRecipient(
-  message: ForwardableEmailMessage,
-  recipient: string
-) {
-  try {
-    await message.forward(recipient);
-  } catch (e) {
-    console.error(`Failed to forward email to ${recipient}: ${e}`);
-  }
-}
-
-async function forwardToMultipleRecipients(
+async function forwardAll(
   message: ForwardableEmailMessage,
   recipients: string[]
 ) {
-  try {
-    await Promise.all(
-      recipients.map((recipient) => message.forward(recipient))
-    );
-  } catch (e) {
-    console.error(`Failed to forward email to multiple recipients: ${e}`);
-  }
-}
+  const deduped = normalizeAndDedupe(recipients);
 
-async function forwardToAudit(message: ForwardableEmailMessage) {
   try {
-    await message.forward(AuditRecipient);
-    console.log(`Forwarded email to audit recipient: ${AuditRecipient}`);
+    await Promise.all(deduped.map((r) => message.forward(r)));
   } catch (e) {
-    console.error(
-      `Failed to forward email to audit recipient ${AuditRecipient}: ${e}`
-    );
+    console.error(`Failed to forward email: ${e}`);
   }
 }
 
@@ -94,35 +76,27 @@ export default {
     );
 
     // Always forward to audit recipient first (except for blackholed emails)
-    let isBlackholed = false;
 
     if (!route) {
       console.log(`No route found for email to ${message.to}`);
-      await Promise.all([
-        forwardToSingleRecipient(message, DefaultRecipient),
-        forwardToAudit(message),
-      ]);
+
+      const recipients = normalizeAndDedupe([DefaultRecipient, AuditRecipient]);
+
+      await forwardAll(message, recipients);
     } else if (route.recipients.includes(BlackholeRecipient)) {
       console.log(`Blackholing email to ${message.to}`);
-      isBlackholed = true;
       await discardAndNotify(message);
-      // Note: We don't forward blackholed emails to audit to avoid spam
-    } else if (route.recipients.length === 1) {
-      console.log(
-        `Forwarding email to ${message.to} to ${route.recipients[0]}`
-      );
-      await Promise.all([
-        forwardToSingleRecipient(message, route.recipients[0]),
-        forwardToAudit(message),
-      ]);
     } else {
       console.log(
         `Forwarding email to ${message.to} to ${route.recipients.join(', ')}`
       );
-      await Promise.all([
-        forwardToMultipleRecipients(message, route.recipients),
-        forwardToAudit(message),
+
+      const recipients = normalizeAndDedupe([
+        ...route.recipients,
+        AuditRecipient,
       ]);
+
+      await forwardAll(message, recipients);
     }
   },
 };
