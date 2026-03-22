@@ -3,15 +3,21 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const client = new Cloudflare({
-  apiToken: process.env.CLOUDFLARE_API_TOKEN, // token with Account:Email Routing Addresses:Edit permissions
-});
-
 const account_id = process.env.CLOUDFLARE_ACCOUNT_ID!; // account id for the domain
 if (!account_id) {
   console.error('CLOUDFLARE_ACCOUNT_ID is not set');
   process.exit(1);
 }
+
+const apiToken = process.env.CLOUDFLARE_API_TOKEN;
+if (!apiToken) {
+  console.error('CLOUDFLARE_API_TOKEN is not set');
+  process.exit(1);
+}
+
+const client = new Cloudflare({
+  apiToken, // token with Account:Email Routing Addresses:Edit permissions
+});
 
 async function getAddresses() {
   const addresses: Cloudflare.EmailRouting.Addresses.Address[] = [];
