@@ -7,7 +7,7 @@ const DefaultRecipient = 'chnorton@tamu.edu';
 
 const BlackholeRecipient = 'blackhole';
 
-const AuditRecipient = DefaultRecipient;
+const AuditRecipient = 'ieee@tamu.edu';
 
 const Routes: readonly Route[] = [
   // Executive Board
