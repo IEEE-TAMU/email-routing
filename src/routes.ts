@@ -13,55 +13,73 @@ const Routes: readonly Route[] = [
   // Executive Board
   {
     destination: 'president@ieeetamu.org',
-    recipients: ['oliver.jansen@tamu.edu'],
+    recipients: ['alanjaf@tamu.edu'],
   },
   {
     destination: 'vicepresident@ieeetamu.org',
-    recipients: ['smayhue@tamu.edu'],
+    recipients: ['jr338567@tamu.edu'],
   },
   {
     destination: 'treasurer@ieeetamu.org',
-    recipients: ['ieeetamu.cfo@gmail.com'],
-  }, //"nafibaksh@ tamu.edu"] },
-  { destination: 'secretary@ieeetamu.org', recipients: ['akafle@tamu.edu'] },
+    recipients: ['andyluu05@tamu.edu'],
+  },
+  {
+    destination: 'secretary@ieeetamu.org',
+    recipients: ['oliver.jansen@tamu.edu']
+  },
 
   // Undersecretaries
-  { destination: 'webmaster@ieeetamu.org', recipients: ['chnorton@tamu.edu'] },
-  { destination: 'historian@ieeetamu.org', recipients: ['gjohny@tamu.edu'] },
+  {
+    destination: 'webmaster@ieeetamu.org',
+    recipients: [
+      'chnorton@tamu.edu',
+      'jadonlee@tamu.edu'
+    ]
+  },
 
   // Chairs
   {
-    destination: 'events@ieeetamu.org',
-    recipients: [
-      'alanjaf@tamu.edu',
-      'jadonlee@tamu.edu',
-      'tanbuyyana04@tamu.edu',
-      'pallavigok@tamu.edu',
-    ],
+    destination: 'technical@ieeetamu.org',
+    recipients: ['caden.mac2005@tamu.edu']
   },
-  { destination: 'tec@ieeetamu.org', recipients: ['jyotiverma607@tamu.edu'] },
+  {
+    destination: 'tec@ieeetamu.org',
+    recipients: ['caden.mac2005@tamu.edu']
+  },
   {
     destination: 'publicrelations@ieeetamu.org',
-    recipients: ['liannie@tamu.edu'],
+    recipients: ['akafle@tamu.edu '],
   },
   {
     destination: 'corporate@ieeetamu.org',
-    recipients: ['ieeetamu.corporate@gmail.com'],
+    recipients: ['faizane10@tamu.edu'],
   },
   {
     destination: 'activities@ieeetamu.org',
-    recipients: ['andyluu05@tamu.edu', 'jr338567@tamu.edu'],
+    recipients: ['tonydoan@tamu.edu'],
   },
 
   // Special use
-  { destination: 'summit@ieeetamu.org', recipients: ['alanjaf@tamu.edu'] },
+  {
+    destination: 'summit@ieeetamu.org',
+    recipients: ['alanjaf@tamu.edu']
+  },
 
   // No-reply and blackhole addresses
-  { destination: 'donotreply@ieeetamu.org', recipients: [BlackholeRecipient] },
-  { destination: 'noreply@ieeetamu.org', recipients: [BlackholeRecipient] },
+  {
+    destination: 'donotreply@ieeetamu.org',
+    recipients: [BlackholeRecipient]
+  },
+  {
+    destination: 'noreply@ieeetamu.org',
+    recipients: [BlackholeRecipient]
+  },
 
   // recovery email - should be set as the recovery email for any accounts
-  { destination: 'recovery@ieeetamu.org', recipients: ['chnorton@tamu.edu'] },
+  {
+    destination: 'recovery@ieeetamu.org',
+    recipients: ['ieee@tamu.edu']
+  },
 ];
 
 export { Routes, DefaultRecipient, BlackholeRecipient, AuditRecipient };
