@@ -64,6 +64,10 @@ const Routes: readonly Route[] = [
     destination: 'summit@ieeetamu.org',
     recipients: ['alanjaf@tamu.edu']
   },
+	{
+    destination: 'sponsorship@ieeetamu.org',
+    recipients: ['faizane10@tamu.edu'],
+  },
 
   // No-reply and blackhole addresses
   {
