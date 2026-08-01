@@ -25,26 +25,23 @@ const Routes: readonly Route[] = [
   },
   {
     destination: 'secretary@ieeetamu.org',
-    recipients: ['oliver.jansen@tamu.edu']
+    recipients: ['oliver.jansen@tamu.edu'],
   },
 
   // Undersecretaries
   {
     destination: 'webmaster@ieeetamu.org',
-    recipients: [
-      'chnorton@tamu.edu',
-      'jadonlee@tamu.edu'
-    ]
+    recipients: ['chnorton@tamu.edu', 'jadonlee@tamu.edu'],
   },
 
   // Chairs
   {
     destination: 'technical@ieeetamu.org',
-    recipients: ['caden.mac2005@tamu.edu']
+    recipients: ['caden.mac2005@tamu.edu'],
   },
   {
     destination: 'tec@ieeetamu.org',
-    recipients: ['caden.mac2005@tamu.edu']
+    recipients: ['caden.mac2005@tamu.edu'],
   },
   {
     destination: 'publicrelations@ieeetamu.org',
@@ -62,9 +59,9 @@ const Routes: readonly Route[] = [
   // Special use
   {
     destination: 'summit@ieeetamu.org',
-    recipients: ['alanjaf@tamu.edu']
+    recipients: ['alanjaf@tamu.edu'],
   },
-	{
+  {
     destination: 'sponsorship@ieeetamu.org',
     recipients: ['faizane10@tamu.edu'],
   },
@@ -72,17 +69,17 @@ const Routes: readonly Route[] = [
   // No-reply and blackhole addresses
   {
     destination: 'donotreply@ieeetamu.org',
-    recipients: [BlackholeRecipient]
+    recipients: [BlackholeRecipient],
   },
   {
     destination: 'noreply@ieeetamu.org',
-    recipients: [BlackholeRecipient]
+    recipients: [BlackholeRecipient],
   },
 
   // recovery email - should be set as the recovery email for any accounts
   {
     destination: 'recovery@ieeetamu.org',
-    recipients: ['ieee@tamu.edu']
+    recipients: ['ieee@tamu.edu'],
   },
 ];
 
