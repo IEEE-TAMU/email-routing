@@ -66,7 +66,7 @@ const Routes: readonly Route[] = [
 	{
 		destination: 'officereno@ieeetamu.org',
     recipients: ['clarkemic@tamu.edu',
-								 'alanjaf@tamu.edu0',
+								 'alanjaf@tamu.edu',
 								 'kenneth_lundquist@tamu.edu',
 								'jr338567@tamu.edu',
 								'andyluu05@tamu.edu',
