@@ -31,17 +31,21 @@ const Routes: readonly Route[] = [
   // Undersecretaries
   {
     destination: 'webmaster@ieeetamu.org',
-    recipients: ['chnorton@tamu.edu', 'jadonlee@tamu.edu'],
+    recipients: [
+      'chnorton@tamu.edu',
+      'jadonlee@tamu.edu',
+      'clarkemic@tamu.edu',
+    ],
   },
 
   // Chairs
   {
     destination: 'technical@ieeetamu.org',
-    recipients: ['caden.mac2005@tamu.edu'],
+    recipients: ['caden.mac2005@tamu.edu', 'clarkemic@tamu.edu'],
   },
   {
     destination: 'tec@ieeetamu.org',
-    recipients: ['caden.mac2005@tamu.edu'],
+    recipients: ['caden.mac2005@tamu.edu', 'clarkemic@tamu.edu'],
   },
   {
     destination: 'publicrelations@ieeetamu.org',
@@ -49,7 +53,7 @@ const Routes: readonly Route[] = [
   },
   {
     destination: 'corporate@ieeetamu.org',
-    recipients: ['faizane10@tamu.edu'],
+    recipients: ['faizane10@tamu.edu', 'clarkemic@tamu.edu'],
   },
   {
     destination: 'activities@ieeetamu.org',
@@ -62,6 +66,19 @@ const Routes: readonly Route[] = [
   },
 
   // Special use
+
+  {
+    destination: 'officereno@ieeetamu.org',
+    recipients: [
+      'clarkemic@tamu.edu',
+      'alanjaf@tamu.edu',
+      'kenneth_lundquist@tamu.edu',
+      'jr338567@tamu.edu',
+      'andyluu05@tamu.edu',
+      'oliver.jansen@tamu.edu',
+    ],
+  },
+
   {
     destination: 'summit@ieeetamu.org',
     recipients: ['alanjaf@tamu.edu'],
