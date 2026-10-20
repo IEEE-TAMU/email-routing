@@ -8,6 +8,7 @@
     "dev": "wrangler dev",
     "start": "wrangler dev",
     "add-email": "esrun scripts/modify_email.ts add",
+    "add-unverified": "scripts/add_unverified.sh",
     "list-email": "esrun scripts/modify_email.ts list",
     "delete-email": "esrun scripts/modify_email.ts delete",
     "check": "scripts/check_emails.sh",

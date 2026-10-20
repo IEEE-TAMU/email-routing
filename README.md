@@ -24,6 +24,13 @@ Check if an officer's tamu.edu address is verified
 npm run list-email
 ```
 
+To add every email in the [routes.ts](src/routes.ts) file that is not verified yet in a single step
+```bash
+npm run add-unverified
+```
+
+Each newly added officer will still need to verify the email address by clicking the link in the email sent to the address from cloudflare.
+
 ## Removing an officer
 To stop routing emails to an officer, remove the officer's ieeetamu.org address from the routing table in the [routes.ts](src/routes.ts) file. The officer's tamu.edu address will still be verified and elligible to recieve emails.
 
