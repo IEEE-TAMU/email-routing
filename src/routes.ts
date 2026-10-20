@@ -41,19 +41,19 @@ const Routes: readonly Route[] = [
   // Chairs
   {
     destination: 'technical@ieeetamu.org',
-    recipients: ['caden.mac2005@tamu.edu', 'clarkemic@tamu.edu'],
+    recipients: ['caden.mac2005@tamu.edu', 'vaibhav2.nalamalpu@tamu.edu', 'manbregon727@tamu.edu', 'faiza@tamu.edu', 'clarkemic@tamu.edu'],
   },
   {
     destination: 'tec@ieeetamu.org',
-    recipients: ['caden.mac2005@tamu.edu', 'clarkemic@tamu.edu'],
+    recipients: ['caden.mac2005@tamu.edu', 'vaibhav2.nalamalpu@tamu.edu', 'manbregon727@tamu.edu', 'faiza@tamu.edu', 'clarkemic@tamu.edu'],
   },
   {
     destination: 'publicrelations@ieeetamu.org',
-    recipients: ['akafle@tamu.edu '],
+    recipients: ['akafle@tamu.edu', 'kenneth_lundquist@tamu.edu', 'olivia.mylien@tamu.edu', 'ibrahimah505@tamu.edu'],
   },
   {
     destination: 'corporate@ieeetamu.org',
-    recipients: ['faizane10@tamu.edu', 'clarkemic@tamu.edu'],
+    recipients: ['faizane10@tamu.edu', 'clarkemic@tamu.edu', 'riya.shah6@tamu.edu', 'joseph.yil@tamu.edu', 'amk23@tamu.edu'],
   },
   {
     destination: 'activities@ieeetamu.org',
@@ -85,7 +85,7 @@ const Routes: readonly Route[] = [
   },
   {
     destination: 'sponsorship@ieeetamu.org',
-    recipients: ['faizane10@tamu.edu'],
+    recipients: ['faizane10@tamu.edu', 'riya.shah6@tamu.edu', 'joseph.yil@tamu.edu', 'amk23@tamu.edu'],
   },
 
   // No-reply and blackhole addresses
