@@ -13,6 +13,7 @@
 - **Add email**: `npm run add-email <email>` - Add officer email for verification
 - **List emails**: `npm run list-email` - Show all verified emails
 - **Delete email**: `npm run delete-email <email>` - Remove officer email
+- **Add unverified**: `npm run add-unverified` - Add every email in `src/routes.ts` that is not yet verified
 - **Check emails**: `npm run check` - Validate email routing
 
 ## Code Style
