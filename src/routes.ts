@@ -31,11 +31,7 @@ const Routes: readonly Route[] = [
   // Undersecretaries
   {
     destination: 'webmaster@ieeetamu.org',
-    recipients: [
-      'chnorton@tamu.edu',
-      'jadonlee@tamu.edu',
-      'clarkemic@tamu.edu',
-    ],
+    recipients: ['chnorton@tamu.edu'],
   },
 
   // Chairs
@@ -56,7 +52,6 @@ const Routes: readonly Route[] = [
       'vaibhav2.nalamalpu@tamu.edu',
       'manbregon727@tamu.edu',
       'faiza@tamu.edu',
-      'clarkemic@tamu.edu',
     ],
   },
   {
@@ -72,7 +67,6 @@ const Routes: readonly Route[] = [
     destination: 'corporate@ieeetamu.org',
     recipients: [
       'faizane10@tamu.edu',
-      'clarkemic@tamu.edu',
       'riya.shah6@tamu.edu',
       'joseph.yil@tamu.edu',
       'amk23@tamu.edu',
@@ -82,7 +76,6 @@ const Routes: readonly Route[] = [
     destination: 'activities@ieeetamu.org',
     recipients: [
       'tonydoan@tamu.edu',
-      'branden@tamu.edu',
       'clarkemic@tamu.edu',
       'joaquinwelch@tamu.edu',
     ],
