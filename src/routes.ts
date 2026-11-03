@@ -23,10 +23,10 @@ const Routes: readonly Route[] = [
     destination: 'treasurer@ieeetamu.org',
     recipients: ['andyluu05@tamu.edu'],
   },
-  {
-    destination: 'secretary@ieeetamu.org',
-    recipients: ['oliver.jansen@tamu.edu'],
-  },
+  // {
+  //   destination: 'secretary@ieeetamu.org',
+  //   recipients: [''],
+  // },
 
   // Undersecretaries
   {
@@ -91,7 +91,6 @@ const Routes: readonly Route[] = [
       'kenneth_lundquist@tamu.edu',
       'jr338567@tamu.edu',
       'andyluu05@tamu.edu',
-      'oliver.jansen@tamu.edu',
     ],
   },
 
